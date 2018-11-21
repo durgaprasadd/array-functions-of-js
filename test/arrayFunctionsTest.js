@@ -14,6 +14,10 @@ const greatestNumber = function(a,b){
   return Math.max(a,b);
 }
 
+const add = function(a,b){
+  return a+b;
+}
+
 const testMap = function(functionName,input,output){
   assert.deepEqual(map(functionName,input),output);
 }
@@ -32,14 +36,19 @@ testFilter(isEven,[1,2,3],[2]);
 testFilter(isEven,[1,2,3,4,5,6],[2,4,6]);
 
 
-const testReduce = function(functionName,input,output,accumulator){
-  assert.deepEqual(reduce(functionName,input,accumulator),output);
+const testReduce = function(functionName,input,output){
+  assert.deepEqual(reduce(functionName,input[0],input[1]),output);
 }
 
-testReduce(greatestNumber,[],1,1);
-testReduce(greatestNumber,[1,2],2);
-testReduce(greatestNumber,[1,2,3,4],5,5);
-testReduce(greatestNumber,[],10,10);
-testReduce(greatestNumber,[5,1,3],5,1);
+testReduce(greatestNumber,[[],1],1);
+testReduce(greatestNumber,[[1,2]],2);
+testReduce(greatestNumber,[[1,2,3,4],5],5);
+testReduce(greatestNumber,[[],10],10);
+testReduce(greatestNumber,[[5,1,3],1],5);
+
+testReduce(add,[[],0],0)
+testReduce(add,[[1,2,3,4,5]],15)
+testReduce(add,[[1,2,3,4,5],10],25)
+
 
 console.log("all tests are passed!");

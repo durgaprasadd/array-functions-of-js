@@ -16,7 +16,11 @@ const filter = function(functionToApply,list){
   return result;
 }
 
-const reduce = function(functionToApply,list,accumulator=list[0]){
+const reduce = function(functionToApply,source,accumulator){
+  let list = source.slice();
+  if(accumulator == undefined){
+    accumulator = list.shift();
+  }
   for(let value of list){
     accumulator = functionToApply(accumulator,value);
   }
