@@ -18,37 +18,44 @@ const add = function(a,b){
   return a+b;
 }
 
-const testMap = function(functionName,input,output){
-  assert.deepEqual(map(functionName,input),output);
-}
+describe('map',()=>{
+  it("should return empty array when input is empty array",()=>{
+    assert.deepEqual(map(addOne,[]),[]);
+  })
+  it("should return single element array when input is single element array",()=>{
+    assert.deepEqual(map(addOne,[1]),[2]);
+  })
+  it("should return same length of array",()=>{
+    assert.deepEqual(map(addOne,[2,3]),[3,4]);
+  })
+})
 
-testMap(addOne,[],[]);
-testMap(addOne,[1],[2]);
-testMap(addOne,[2,3],[3,4]);
+describe("filter",function(){
+  it("should return empty array when input is empty array",function(){
+    assert.deepEqual(filter(isEven,[]),[]);
+  })
+  it("should return empty array",function(){
+    assert.deepEqual(filter(isEven,[1]),[]);
+  })
+  it("should return same array",function(){
+    assert.deepEqual(filter(isEven,[2]),[2]);
+  })
+  it("should return array of filtered elements",function(){
+    assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
+  })
+})
 
-const testFilter = function(functionName,input,output){
-  assert.deepEqual(filter(functionName,input),output);
-}
-
-testFilter(isEven,[],[]);
-testFilter(isEven,[1],[]);
-testFilter(isEven,[1,2,3],[2]);
-testFilter(isEven,[1,2,3,4,5,6],[2,4,6]);
-
-
-const testReduce = function(functionName,input,output){
-  assert.deepEqual(reduce(functionName,input[0],input[1]),output);
-}
-
-testReduce(greatestNumber,[[],1],1);
-testReduce(greatestNumber,[[1,2]],2);
-testReduce(greatestNumber,[[1,2,3,4],5],5);
-testReduce(greatestNumber,[[],10],10);
-testReduce(greatestNumber,[[5,1,3],1],5);
-
-testReduce(add,[[],0],0)
-testReduce(add,[[1,2,3,4,5]],15)
-testReduce(add,[[1,2,3,4,5],10],25)
-
-
-console.log("all tests are passed!");
+describe("reduce",function(){
+  it("should return accumulator when array is empty",function(){
+    assert.deepEqual(reduce(greatestNumber,[],1),1);
+    assert.deepEqual(reduce(add,[],1),1);
+  })
+  it("should return value when accumulator is empty and array non empty",function(){
+    assert.deepEqual(reduce(greatestNumber,[1,2]),2);
+    assert.deepEqual(reduce(add,[1,2]),3);
+  })
+  it("should return value when accumulator and array are not empty",function(){
+    assert.deepEqual(reduce(greatestNumber,[1,2,3,4],5),5);
+    assert.deepEqual(reduce(add,[1,2,3,4],5),15);
+  })
+})
