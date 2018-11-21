@@ -1,6 +1,6 @@
 let assert = require("assert");
-let lib = require("../main/arrayFunctions.js").module;
-let {map,filter,reduce} = lib;
+let {map,filter,reduce,mapPrime} = require("../main/arrayFunctions.js").module;
+
 
 const addOne = function(element){
   return element+1;
@@ -27,6 +27,18 @@ describe('map',()=>{
   })
   it("should return same length of array",()=>{
     assert.deepEqual(map(addOne,[2,3]),[3,4]);
+  })
+})
+
+describe("mapPrime",function(){
+  it("should return empty array when input is empty array",function(){
+    assert.deepEqual(mapPrime(addOne,[]),[]);
+  })
+  it("should return single element array when input is single element array",()=>{
+    assert.deepEqual(mapPrime(addOne,[1]),[2]);
+  })
+  it("should return same length of array",()=>{
+    assert.deepEqual(mapPrime(addOne,[2,3]),[3,4]);
   })
 })
 
