@@ -1,5 +1,5 @@
 let assert = require("assert");
-let {map,filter,reduce,mapPrime} = require("../main/arrayFunctions.js").module;
+let {map,filter,reduce,mapPrime,filterPrime} = require("../main/arrayFunctions.js").module;
 
 
 const addOne = function(element){
@@ -46,14 +46,29 @@ describe("filter",function(){
   it("should return empty array when input is empty array",function(){
     assert.deepEqual(filter(isEven,[]),[]);
   })
-  it("should return empty array",function(){
+  it("should return empty array when input contains only falsy values",function(){
     assert.deepEqual(filter(isEven,[1]),[]);
   })
-  it("should return same array",function(){
+  it("should return same array when input contains only truthy values",function(){
     assert.deepEqual(filter(isEven,[2]),[2]);
   })
   it("should return array of filtered elements",function(){
     assert.deepEqual(filter(isEven,[1,2,3,4,5,6]),[2,4,6]);
+  })
+})
+
+describe("filterPrime",function(){
+  it("should return empty array when input is empty array",function(){
+    assert.deepEqual(filterPrime(isEven,[]),[]);
+  })
+  it("should return empty array when input contains only falsy values",function(){
+    assert.deepEqual(filterPrime(isEven,[1]),[]);
+  })
+  it("should return same array when input contains only truthy values",function(){
+    assert.deepEqual(filterPrime(isEven,[2]),[2]);
+  })
+  it("should return array of filtered elements",function(){
+    assert.deepEqual(filterPrime(isEven,[1,2,3,4,5,6]),[2,4,6]);
   })
 })
 

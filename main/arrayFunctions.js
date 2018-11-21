@@ -38,5 +38,18 @@ const mapPrime = function(mapper,list){
   return reduce(mapperPrime(mapper),list,[]);
 }
 
+const predicatePrime = function(predicate){
+  return function(accumulator,element){
+    if(predicate(element)){
+      accumulator.push(element);
+    }
+    return accumulator;
+  }
+}
 
-exports.module = { map,filter,reduce,mapPrime };
+const filterPrime = function(predicate,list){
+  return reduce(predicatePrime(predicate),list,[]);
+}
+
+
+exports.module = { map,filter,reduce,mapPrime,filterPrime };
