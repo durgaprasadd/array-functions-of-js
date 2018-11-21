@@ -1,28 +1,28 @@
-const map = function(functionToApply,list){
+const map = function(mapper,list){
   let result =[];
   for(let value of list){
-    result.push(functionToApply(value));
+    result.push(mapper(value));
   }
   return result;
 }
 
-const filter = function(functionToApply,list){
+const filter = function(predicate,list){
   let result=[];
   for(let value of list){
-    if(functionToApply(value)){
+    if(predicate(value)){
       result.push(value);
     }
   }
   return result;
 }
 
-const reduce = function(functionToApply,source,accumulator){
+const reduce = function(reducer,source,accumulator){
   let list = source.slice();
   if(accumulator == undefined){
     accumulator = list.shift();
   }
   for(let value of list){
-    accumulator = functionToApply(accumulator,value);
+    accumulator = reducer(accumulator,value);
   }
   return accumulator;
 }
