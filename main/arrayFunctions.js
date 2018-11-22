@@ -1,9 +1,10 @@
-const map = function(mapper,list){
-  let result =[];
-  for(let value of list){
-    result.push(mapper(value));
+const map = function(mapper,list,result=[]){
+  if(list.length == 0){
+    return result;
   }
-  return result;
+  result.push(mapper(list[0]));
+  list=list.slice(1);
+  return map(mapper,list,result);
 }
 
 const filter = function(predicate,list){
