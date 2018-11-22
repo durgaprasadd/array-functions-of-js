@@ -7,14 +7,15 @@ const map = function(mapper,list,result=[]){
   return map(mapper,list,result);
 }
 
-const filter = function(predicate,list){
-  let result=[];
-  for(let value of list){
-    if(predicate(value)){
-      result.push(value);
-    }
-  }
+const filter = function(predicate,list,result=[]){
+  if(list.length == 0){
   return result;
+  }
+  if(predicate(list[0])){
+    result.push(list[0]);
+  }
+  list=list.slice(1);
+  return filter(predicate,list,result);
 }
 
 const reduce = function(reducer,source,accumulator){
