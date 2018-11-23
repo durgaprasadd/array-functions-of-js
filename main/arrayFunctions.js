@@ -3,19 +3,17 @@ const map = function(mapper,list,result=[]){
     return result;
   }
   result.push(mapper(list[0]));
-  list=list.slice(1);
-  return map(mapper,list,result);
+  return map(mapper,list.slice(1),result);
 }
 
 const filter = function(predicate,list,result=[]){
   if(list.length == 0){
-  return result;
+    return result;
   }
   if(predicate(list[0])){
     result.push(list[0]);
   }
-  list=list.slice(1);
-  return filter(predicate,list,result);
+  return filter(predicate,list.slice(1),result);
 }
 
 const reduce = function(reducer,source,accumulator){
@@ -31,7 +29,7 @@ const reduce = function(reducer,source,accumulator){
 
 const mapperPrime = function(mapper){
   return function(accumulator,element){
-   accumulator.push(mapper(element));
+    accumulator.push(mapper(element));
     return accumulator;
   }
 }
