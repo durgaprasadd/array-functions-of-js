@@ -16,15 +16,16 @@ const filter = function(predicate,list,result=[]){
   return filter(predicate,list.slice(1),result);
 }
 
-const reduce = function(reducer,source,accumulator){
-  let list = source.slice();
-  if(accumulator == undefined){
-    accumulator = list.shift();
+const reduce = function(reducer,list,accumulator){
+  if(accumulator==undefined){
+    accumulator = list[0];
+    list = list.slice(1);
   }
-  for(let value of list){
-    accumulator = reducer(accumulator,value);
+  if(list.length==0){
+    return accumulator;
   }
-  return accumulator;
+  accumulator = reducer(accumulator,list[0]);
+  return reduce(reducer,list.slice(1),accumulator);
 }
 
 const mapperPrime = function(mapper){
